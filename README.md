@@ -12,11 +12,7 @@ The Workbench is developed with the following basic goals in mind:
 
 ## Features
 
-The Workbench aims to implement the following features, which may be subject to updates or changes:
-
-### Inferrence of basic properties
-
-These basic properties can all be directly observed or concretely inferred based on other characteristics:
+The workbench can calculate many of these basic properties that can be directly known from astronomical observation:
 
 * Orbital characterization
 	* Semimajor axis
@@ -33,3 +29,21 @@ These basic properties can all be directly observed or concretely inferred based
 	* Hill sphere
 	* Roche limit
 	* Tidal lock probability
+
+In addition, the workbench aims to provide (more ambitious) tools for reasonable speculation on the following characteristics:
+
+* Rotation period and tidal locking
+* Natural satellites
+* Axial tilt and seasons
+* Composition (partially derived from host metallicity)
+* Atmospheric composition
+* Greenhouse effect and climate
+* Weather conditions
+* Surface conditions
+* Probability of life and biosphere maturity
+* Human habitability
+
+Lastly, the workbench also aims to include tools of use to worldbuilders in the future, such as:
+* Local calendar generation based on orbital, rotational and seasonal characteristics
+* Surface map generation
+* Cloud/weather simulation
