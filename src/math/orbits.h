@@ -27,7 +27,8 @@ enum time_units
 #define MIN_SEC 60.0
 
 /* Function prototypes */
+
 double sma_to_period(double sma, enum orbital_units ou, enum time_units pu);
 double period_to_sma(double period, enum time_units pu, enum orbital_units ou);
 double sma_conv(double sma, enum orbital_units ou1, enum orbital_units ou2);
-double per_conv(double period, enum time_units pu);
+double per_conv(double period, enum time_units pu1, enum orbital_units pu2);
