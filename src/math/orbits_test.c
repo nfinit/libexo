@@ -62,9 +62,11 @@ int main (int argc, char *argv[])
 	/* compute result */
 	switch (mode) {
 		case sma:
-			result = period_to_sma(input, pu, AU);
+			ou = AU;
+			result = period_to_sma(input, pu, ou);
 		case period:
-			result = sma_to_period(input, ou, years);
+			pu = years;
+			result = sma_to_period(input, ou, pu);
 	}	
 
 	/* determine output units and print results */
@@ -98,7 +100,13 @@ int main (int argc, char *argv[])
 
 		if (result < 0.5) {
 			output = per_conv(result, pu, days);
+			pu = days;
 			time_unit = "days";
+			//if (output < 1.0) {
+			//	output = per_conv(result, pu, hours);
+			//	pu = hours;
+			//	time_unit = "hours";
+			//}
 		} else {
 			output = result;
 			time_unit = "years";
@@ -153,7 +161,9 @@ enum time_units set_period_units (char *arg)
  */
 enum orbital_units set_sma_units (char *arg) 
 {
+
 	enum orbital_units ou;
+	ou = AU;
 
 	if (strcmp(arg,"AU") == 0) {
 		ou = AU;
