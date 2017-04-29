@@ -1,179 +1,87 @@
+/* PWB ORBITAL UTILITIES
+ *
+ * Revision I (04/17) (C) NFINIT Systems 2017
+ * Author: ict (ict@nfinit.systems)
+ *
+ * This file provides functions for basic orbital characterization, including
+ * determining orbital period, semimajor axis and combined host-satellite mass
+ * using Kepler's third law
+ *
+ * This program performs calculations on the following units:
+ * Semimajor axis: meters
+ * Orbital period: seconds
+ * Mass: kilograms
+ */
+
 #include <math.h>
-#include "orbits.h"
+#include "../headers/constants.h"
 
-/* SMa to period~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Utilizes Kepler's third law to get the period of an
- * orbit from its semimajor axis using user-defined units
+/* SEMIMAJOR AXIS+COMBINED MASS TO ORBITAL PERIOD:
+ * Converts an orbit's semimajor axis (in meters) to an
+ * orbital period (in seconds), factoring in the combined
+ * mass of both host and satellite
  */
-double sma_to_period(double sma, enum orbital_units ou, enum time_units pu) {
+double period(double sma, double hostmass, double satmass) 
+{
+	/* declare variables */
+	double t;
+	double m;
+	double t_numerator;
+	double t_denominator;
 
-	enum orbital_units orbit_unit;
-	enum time_units period_unit;
-	orbit_unit = AU;
-	period_unit = years;
+	/* initialize combined mass */
+	m = fabs(hostmass + satmass);
 
-	double smaconv;
-	double perconv;
-	double smacb;
-	double period;
+	/* compute orbital period */
+	t_numerator = 4.0 * pow(M_PI, 2.0) * pow(fabs(sma), 3.0);
+	t_denominator = CONST_G * m;
+	t = sqrt(t_numerator / t_denominator);
 
-	/* Convert input SMa to AU */
-	smaconv = sma_conv(sma, ou, orbit_unit);
-
-	/* Calculate orbital period (in years) */
-	smacb = pow(fabs(smaconv), 3);
-	period = sqrt(smacb);
-
-	/* Convert period to desired units */
-	perconv = per_conv(period, period_unit, pu);
-
-	return perconv;
+	/* return period (in seconds) */
+	return t;
 }
 
-/* Period to SMa~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Utilizes Kepler's third law to get the semimajor axis
- * of an orbit from its period using user-defined units
+/* ORBITAL PERIOD+COMBINED MASS TO SEMIMAJOR AXIS:
+ * Converts an orbit's period (in seconds) to a
+ * semimajor axis (in meters), factoring in the combined
+ * mass of both host and satellite
  */
-double period_to_sma(double period, enum time_units pu, enum orbital_units ou) {
+double sma(double period, double hostmass, double satmass) 
+{
+	/* declare variables */
+	double r;
+	double m;
+	double r_numerator;
+	double r_denominator;
 
-	enum orbital_units orbit_unit;
-	enum time_units period_unit;
-	orbit_unit = AU;
-	period_unit = years;
+	/* initialize combined mass */
+	m = fabs(hostmass + satmass);
 
-	double smaconv;
-	double perconv;
-	double persq;
-	double sma;
+	/* compute semimajor axis */
+	r_numerator = CONST_G * m * pow(fabs(period), 2.0);
+	r_denominator = 4 * pow(M_PI, 2.0);
+	r = pow(r_numerator / r_denominator, 1.0 / 3.0);
 
-	/* Convert input period to years */
-	perconv = per_conv(period, pu, period_unit);
-
-	/* Calculate semimajor axis (in AU) */
-	persq = pow(perconv, 2);
-	sma = pow(persq, (1.0 / 3.0));
-
-	/* Convert semimajor axis to desired units */
-	smaconv = sma_conv(sma, orbit_unit, ou);
-
-	return smaconv;
-
+	/* return semimajor axis (in meters) */
+	return r;
 }
 
-/* SMa unit conversion function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Converts a semimajor axis between AU, kilometers or miles
+/* SEMIMAJOR AXIS+ORBITAL PERIOD TO COMBINED MASS:
+ * Uses the semimajor axis and period of an orbit
+ * to approximate the combined mass of the two objects
  */
-double sma_conv(double sma, enum orbital_units ou1, enum orbital_units ou2) {
-	
-	switch (ou1) {
-	case AU:
-		switch (ou2) {
-		case AU:
-			return sma;
-		case km:
-			return sma * AU_KM;
-		case mi:
-			return sma * AU_MI;
-		}
-	case km:
-		switch (ou2) {
-		case AU:
-			return sma / AU_KM;
-		case km:
-			return sma;
-		case mi:
-			return (sma / AU_KM) * AU_MI;
-		}
-	case mi:
-		switch (ou2) {
-		case AU:
-			return sma / AU_MI;
-		case km:
-			return (sma / AU_MI)*AU_KM;
-		case mi:
-			return sma;
-		}
-	}
+double mass(double period, double sma)
+{
+	/* declare variables */
+	double m;
+	double m_numerator;
+	double m_denominator;
 
-	/* return 0 if an invalid unit was specified */
-	return 0.0;
-	
-}
+	/* compute combined mass */
+	m_numerator = 4 * pow(M_PI, 2.0) * pow(fabs(sma),3);
+	m_denominator = CONST_G * pow(fabs(period),2);
+	m = m_numerator / m_denominator;
 
-/* Period unit conversion function~~~~~~~~~~~~~~~~~~~~~~~~
- * Converts a period between years, days, hours or seconds
- */
-double per_conv(double period, enum time_units pu1, enum time_units pu2) {
-	
-	switch (pu1) {
-	case years:
-		switch (pu2) {
-		case years:
-			return period;
-		case days:
-			return period * YR_DAY;
-		case hours:
-			return period * YR_DAY * DAY_HR;
-		case minutes:
-			return period * YR_DAY * DAY_HR * HR_MIN;
-		case seconds:
-			return period * YR_DAY * DAY_HR * HR_MIN * MIN_SEC;
-		}
-	case days:
-		switch (pu2) {
-		case years:
-			return period / YR_DAY;
-		case days:
-			return period;
-		case hours:
-			return period * DAY_HR;
-		case minutes:
-			return period * DAY_HR * HR_MIN;
-		case seconds:
-			return period * DAY_HR * HR_MIN * MIN_SEC;
-		}
-	case hours:
-		switch (pu2) {
-		case years:
-			return (period / DAY_HR) / YR_DAY;
-		case days:
-			return period / DAY_HR;
-		case hours:
-			return period;
-		case minutes:
-			return period * HR_MIN;
-		case seconds:
-			return period * MIN_SEC;
-		}
-	case minutes:
-		switch (pu2) {
-		case years:
-			return ((period / HR_MIN) / DAY_HR) / YR_DAY;
-		case days:
-			return (period / HR_MIN) / DAY_HR;
-		case hours:
-			return period / HR_MIN;
-		case minutes:
-			return period;
-		case seconds:
-			return period * MIN_SEC;
-		}
-	case seconds:
-		switch (pu2) {
-		case years:
-			return (((period / MIN_SEC) / HR_MIN) / DAY_HR) / YR_DAY;
-		case days:
-			return ((period / MIN_SEC) / HR_MIN) / DAY_HR;
-		case hours:
-			return (period / MIN_SEC) / HR_MIN;
-		case minutes:
-			return period / MIN_SEC;
-		case seconds:
-			return period;
-		}
-	}
-
-	/* return 0 if an invalid unit was specified */
-	return 0.0;
-
+	/* return combined mass (in kilograms) */
+	return m;
 }
