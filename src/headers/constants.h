@@ -1,4 +1,11 @@
-/* ~~~ MATHEMATICAL CONSTANTS ~~~ */
+/* PWB CONSTANT DEFINITIONS
+ *
+ * Revision I (04/17) (C) NFINIT Systems 2017
+ * Author: ict (ict@nfinit.systems)
+ *
+ * This file provides definitions for mathematical constants commonly used 
+ * in other workbench components for various computations.
+ */
 
 /* GRAVITATIONAL CONSTANT
  * G = 6.67408 x 10^-11 m^3 kg^-1 s^-2
