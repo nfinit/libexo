@@ -78,8 +78,8 @@ double mass(double period, double sma)
 	double m_denominator;
 
 	/* compute combined mass */
-	m_numerator = 4 * pow(M_PI, 2.0) * pow(fabs(sma),3);
-	m_denominator = CONST_G * pow(fabs(period),2);
+	m_numerator = 4 * pow(M_PI, 2.0) * pow(fabs(sma), 3.0);
+	m_denominator = CONST_G * pow(fabs(period), 2.0);
 	m = m_numerator / m_denominator;
 
 	/* return combined mass (in kilograms) */
