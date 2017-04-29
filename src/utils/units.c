@@ -86,7 +86,7 @@ double convert_smaunit(double sma, smaunit in, smaunit out)
 				case km:
 					return sma;
 				case mi:
-					return sma * KM_MI;
+					return sma / MI_KM;
 				case m:
 					return sma * KM_M;
 				case ft:
@@ -97,7 +97,7 @@ double convert_smaunit(double sma, smaunit in, smaunit out)
 				case AU:
 					return sma / AU_MI;
 				case km:
-					return sma / KM_MI;
+					return sma * MI_KM;
 				case mi:
 					return sma;
 				case m:
@@ -123,7 +123,7 @@ double convert_smaunit(double sma, smaunit in, smaunit out)
 				case AU:
 					return sma * FT_AU;
 				case km:
-					return sma * FT_KM;
+					return (sma / M_FT) / KM_M;
 				case mi:
 					return sma / MI_FT;
 				case m:

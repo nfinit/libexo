@@ -42,22 +42,22 @@ typedef enum per_unit perunit;
 #define HR_MSEC HR_SEC * SEC_MSEC
 
 /* DISTANCE CONVERSION */
-#define MI_M 1609.344
 #define AU_M 149597870700.0
 #define KM_M 1000.0
-#define M_FT 3.28084
+#define MI_KM 1.60934
+#define MI_M 1609.344
 #define MI_FT 5280.0
+#define M_FT 3.28084
 
 /* EXT. DISTANCE CONVERSION (AU) */
 
-#define AU_FT AU_M / M_FT
-#define AU_MI AU_FT / MI_FT
+#define AU_FT AU_M * M_FT
 #define AU_KM AU_M / KM_M
+#define AU_MI AU_KM / MI_KM
 
 /* EXT. DISTANCE CONVERSION (KM) */
 
-#define KM_FT KM_M / M_FT
-#define KM_MI KM_FT / MI_FT
+#define KM_FT KM_M * M_FT
 
 /* EXT. DISTANCE CONVERSION (M) */
 #define M_MI M_FT / MI_FT
