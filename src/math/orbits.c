@@ -71,7 +71,7 @@ double sma(double period, double hostmass, double satmass)
  * orbit (in seconds) to approximate the combined mass 
  * of the two objects
  */
-double mass(double period, double sma)
+double mass(double sma, double period)
 {
 	/* declare variables */
 	double m;
