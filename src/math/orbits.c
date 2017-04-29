@@ -67,8 +67,9 @@ double sma(double period, double hostmass, double satmass)
 }
 
 /* SEMIMAJOR AXIS+ORBITAL PERIOD TO COMBINED MASS:
- * Uses the semimajor axis and period of an orbit
- * to approximate the combined mass of the two objects
+ * Uses the semimajor axis (in meters) and period of an 
+ * orbit (in seconds) to approximate the combined mass 
+ * of the two objects
  */
 double mass(double period, double sma)
 {
