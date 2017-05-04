@@ -14,7 +14,7 @@
  */
 
 #include <math.h>
-#include "../headers/constants.h"
+#include "../../include/constants.h"
 
 /* SEMIMAJOR AXIS+COMBINED MASS TO ORBITAL PERIOD:
  * Converts an orbit's semimajor axis (in meters) to an
