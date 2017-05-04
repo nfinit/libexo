@@ -6,6 +6,12 @@
  * This file provides function prototypes for the main orbital
  * utilities file that can be used in other programs utilizing
  * these functions
+ *
+ * These functions work with the following units:
+ * Orbital periods: seconds
+ * Semimajor axes: meters
+ * Masses: kilograms
+ *
  */
 
 double period(double sma, double hostmass, double satmass);

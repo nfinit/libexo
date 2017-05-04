@@ -8,6 +8,7 @@
  * supported units
  */
 
+#include <stdio.h>
 #include <string.h>
 #include "../../include/units.h"
 #include "../../include/unit_arrays.h"

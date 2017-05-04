@@ -32,7 +32,7 @@ double per_table[NUM_PER_UNITS][NUM_PER_UNITS] = {
 	{3.17097E-8, 1.15741E-5, 2.78E-4, 0.0167, 1.0}
 };
 /* Mass unit conversion table */
-double mass_table[NUM_SMA_UNITS][NUM_SMA_UNITS] = {
+double mass_table[NUM_MASS_UNITS][NUM_MASS_UNITS] = {
 	{1.0, 1.6744252E-25, 5.26834E-28, 5.029081E-31},
 	{5.9721986E+24, 1.000, 0.00314636, 3.003467E-6},
 	{1.89813E+27, 317.828, 1.0000000000, 9.5458E-4},

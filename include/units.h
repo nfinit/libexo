@@ -12,7 +12,7 @@
  */
 
 /* UNIT ENUMERATIONS */
-enum sma_unit {AU, km, mi, m, ft, NO_SMA_UNIT};
+enum sma_unit {AU, km, m, NO_SMA_UNIT};
 enum per_unit {years, days, hours, minutes, seconds, NO_PER_UNIT};
 enum mass_unit {kg, Me, Mj, Msun, NO_MASS_UNIT};
 
