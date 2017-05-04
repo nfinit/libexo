@@ -14,10 +14,12 @@
 /* UNIT ENUMERATIONS */
 enum sma_unit {AU, km, mi, m, ft, NO_SMA_UNIT};
 enum per_unit {years, days, hours, minutes, seconds, NO_PER_UNIT};
+enum mass_unit {kg, Me, Mj, Msun, NO_MASS_UNIT};
 
 /* UNIT ENUMERATION TYPEDEFS */
 typedef enum sma_unit smaunit;
 typedef enum per_unit perunit;
+typedef enum mass_unit massunit;
 
 /* BASIC TIME CONVERSION */
 #define YR_DAY 365.0
