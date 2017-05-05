@@ -12,11 +12,11 @@ The Workbench is developed with the following basic goals in mind:
 
 ## Features
 
-The workbench can calculate many of these basic properties that can be directly known from astronomical observation:
+The workbench will be able to infer a number of properties based on known data, entries in the following list that have been crossed out have been implemented:
 
 * Orbital characterization
-	* Semimajor axis
-	* Orbital period
+	* ~~Semimajor axis~~ *(5/4/17)*
+	* ~~Orbital period~~ *(5/4/17)*
 	* Eccentricity
 	* Inclination
 	* Perihelion/aphelion distances
