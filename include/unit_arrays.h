@@ -8,9 +8,14 @@
  */
 
 /* UNIT STRING ARRAYS */
-char *sma_units[] = {"AU", "KM", "M", "au", "km", "m"};
-char *per_units[] = {"years", "days", "hours", "minutes", "seconds"};
-char *mass_units[] = {"KG", "ME", "MJ", "MSun", "kg", "me", "mj", "msun"};
+char *sma_units[] = {"AU", "km", "m",
+                     "au", "KM", "M"};
+char *per_units[] = {"years", "days", "hours", "minutes", "seconds",
+		     "year", "day", "hour", "minute", "second",
+                     "yr", "d", "hr", "min", "sec"};
+char *mass_units[] = {"kg", "Me", "Mj", "MSun", 
+                      "KG", "ME", "MJ", "MSUN",
+		      "Kg", "me", "mj", "msun"};
 
 /* UNIT ARRAY LENGTHS */
 #define NUM_SMA_UNITS  3

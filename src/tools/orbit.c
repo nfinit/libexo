@@ -21,13 +21,16 @@
 <number> <unit> \
 <host mass> <unit> \
 <companion mass> <unit>"
-#define UNIT_ERR "An invalid unit has been entered. \
-Please refer to the Workbench documentation for a list of supported units."
+#define UNIT_ERR "An invalid unit has been entered."
+#define UNIT_LIST "The workbench can work with measurements in the following units:"
+#define UNIT_SMA "Length: "
+#define UNIT_PER "Time: "
+#define UNIT_MASS "Mass: "
 
 /* enumerations, prototypes and other useful definitions */
 enum conversion_type {sma_period, period_sma, conv_error};
-typedef enum conversion_type conv_t;
-conv_t get_conv(char *arg);
+typedef enum conversion_type convtype;
+convtype get_conv(char *arg);
 
 /* MAIN FUNCTION
  * Takes the following arguments:
@@ -51,11 +54,12 @@ int main (int argc, char *argv[])
 	double cc = 0.0; /* companion mass in kilograms */
 	double r = 0.0; /* computation result */
 	double rc = 0.0; /* human-readable computation result */
-	conv_t conv = conv_error; /* calculation/conversion to perform */
+	convtype conv = conv_error; /* calculation/conversion to perform */
 	smaunit su = NO_SMA_UNIT; /* unit of the primary value if SmA */
 	perunit pu = NO_PER_UNIT; /* unit of the primary value if period */
 	massunit hu = NO_MASS_UNIT; /* units of the host mass */
 	massunit cu = NO_MASS_UNIT; /* units of the companion mass */
+	char *out_str;
 
 	/* parse number to convert */
 	n = atof(argv[1]);
@@ -73,6 +77,10 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			printf("%s\n",UNIT_ERR);
+			printf("%s\n",UNIT_LIST);
+			printf("%s%s\n",UNIT_SMA,supported_sma_units());
+			printf("%s%s\n",UNIT_PER,supported_per_units());
+			printf("%s%s\n",UNIT_MASS,supported_mass_units());
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -99,6 +107,10 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			printf("%s\n",UNIT_ERR);
+			printf("%s\n",UNIT_LIST);
+			printf("%s%s\n",UNIT_SMA,supported_sma_units());
+			printf("%s%s\n",UNIT_PER,supported_per_units());
+			printf("%s%s\n",UNIT_MASS,supported_mass_units());
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -117,6 +129,10 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			printf("%s\n",UNIT_ERR);
+			printf("%s\n",UNIT_LIST);
+			printf("%s%s\n",UNIT_SMA,supported_sma_units());
+			printf("%s%s\n",UNIT_PER,supported_per_units());
+			printf("%s%s\n",UNIT_MASS,supported_mass_units());
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -124,30 +140,27 @@ int main (int argc, char *argv[])
 	/* convert result */
 	switch (conv) {
 		case sma_period:
-			rc = convert_perunit(r,seconds,days);
+			pu = select_perunit(r);
+			out_str = perunit_string(pu);
+			rc = convert_perunit(r,seconds,pu);
 			break;
 		case period_sma:
-			rc = convert_smaunit(r,m,AU);
+			su = select_smaunit(r);
+			out_str = smaunit_string(su);
+			rc = convert_smaunit(r,m,su);
 			break;
 		default:
 			printf("%s\n",UNIT_ERR);
+			printf("%s\n",UNIT_LIST);
+			printf("%s%s\n",UNIT_SMA,supported_sma_units());
+			printf("%s%s\n",UNIT_PER,supported_per_units());
+			printf("%s%s\n",UNIT_MASS,supported_mass_units());
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
 
 	/* print result for user */
-	switch (conv) {
-		case sma_period:
-			printf("%f days\n",rc);
-			break;
-		case period_sma:
-			printf("%f AU\n",rc);
-			break;
-		default:
-			printf("%s\n",UNIT_ERR);
-			printf("%s\n",HELP_STR);
-			return 0;
-	}
+	printf("%f %s\n",rc,out_str);
 	
 	/* computation is done */
 	return 0;
@@ -155,12 +168,12 @@ int main (int argc, char *argv[])
 
 /* Parses arguments to get a conversion type to pass to the main function
  */
-conv_t get_conv(char *arg)
+convtype get_conv(char *arg)
 {
 	/* declare variables */
 	smaunit s = NO_SMA_UNIT;
 	perunit p = NO_PER_UNIT;
-	conv_t r = conv_error;
+	convtype r = conv_error;
 
 	/* attempt to parse an SMA first */ 
 	s = parse_sma_unit(arg);

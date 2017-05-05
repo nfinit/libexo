@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "../../include/units.h"
 #include "../../include/unit_arrays.h"
@@ -55,6 +56,12 @@ perunit parse_per_unit(char *arg)
 		if (strcmp(arg, per_units[i]) == 0) {
 			r = i;
 			break;
+		} else if (strcmp(arg, per_units[i+NUM_PER_UNITS]) == 0) {
+			r = i;
+			break;
+		} else if (strcmp(arg, per_units[i+(NUM_PER_UNITS*2)]) == 0) {
+			r = i;
+			break;
 		} else {
 			r = NO_PER_UNIT;
 		}
@@ -79,6 +86,9 @@ massunit parse_mass_unit(char *arg)
 			r = i;
 			break;
 		} else if (strcmp(arg, mass_units[i+NUM_MASS_UNITS]) == 0) {
+			r = i;
+			break;
+		} else if (strcmp(arg, mass_units[i+(NUM_MASS_UNITS*2)]) == 0) {
 			r = i;
 			break;
 		} else {
@@ -144,4 +154,104 @@ double convert_massunit(double mass, massunit in, massunit out)
 
 	/* we shouldn't get here */
 	return -1;
+}
+
+char *supported_sma_units()
+{
+	/* declare variables */
+	int i;
+	char* r = malloc(80 * sizeof(char));
+
+	/* iterate through supported units */
+	for (i = 0; i < NUM_SMA_UNITS; i++)
+	{
+		strcat(r, sma_units[i]);
+		if (i != NUM_SMA_UNITS-1) {
+			if (strlen(r) + strlen(sma_units[i+1]) >= 80-1 ) break;
+			strcat(r, ", ");
+		}
+	}
+
+	/* return completed string */
+	return r;	
+}
+
+char *supported_per_units()
+{
+	/* declare variables */
+	int i;
+	char* r = malloc(80 * sizeof(char));
+
+	/* iterate through supported units */
+	for (i = 0; i < NUM_PER_UNITS; i++)
+	{
+		strcat(r, per_units[i]);
+		if (i != NUM_PER_UNITS-1) {
+			if (strlen(r) + strlen(per_units[i+1]) >= 80-1 ) break;
+			strcat(r, ", ");
+		}
+	}
+
+	/* return completed string */
+	return r;	
+}
+
+char *supported_mass_units()
+{
+	/* declare variables */
+	int i;
+	char* r = malloc(80 * sizeof(char));
+
+	/* iterate through supported units */
+	for (i = 0; i < NUM_MASS_UNITS; i++)
+	{
+		strcat(r, mass_units[i]);
+		if (i != NUM_MASS_UNITS-1) {
+			if (strlen(r) + strlen(mass_units[i+1]) >= 80-1 ) break;
+			strcat(r, ", ");
+		}
+	}
+
+	/* return completed string */
+	return r;	
+}
+
+/* Automatically selects a unit based on an input in seconds
+ */
+perunit select_perunit(double p)
+{
+	if (p < per_table[minutes][seconds]) return seconds;
+	if (p < per_table[hours][seconds]) return minutes;
+	if (p < per_table[days][seconds]) return hours;
+	if (p < (per_table[years][seconds] * 0.6)) return days;
+	return years;
+}
+
+/* Automatically selects a unit based on an input in meters
+ */
+smaunit select_smaunit(double s)
+{
+	if (s < sma_table[km][m]) return m;
+	if (s < (sma_table[AU][m] * 0.05)) return km;
+	return AU;
+}
+
+/* Gets a string corresponding to the given unit from the 
+ * main time measurement string array
+ */
+char *perunit_string(perunit p)
+{
+	if (p < 0) return per_units[0];
+	if (p >= NUM_PER_UNITS) return per_units[NUM_PER_UNITS-1];
+	return per_units[p];	
+}
+
+/* Gets a string corresponding to the given unit from the 
+ * main length measurement string array
+ */
+char *smaunit_string(smaunit s)
+{
+	if (s < 0) return sma_units[0];
+	if (s >= NUM_SMA_UNITS) return sma_units[NUM_SMA_UNITS-1];
+	return sma_units[s];	
 }
