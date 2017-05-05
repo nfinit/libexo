@@ -21,16 +21,12 @@
 <number> <unit> \
 <host mass> <unit> \
 <companion mass> <unit>"
-#define UNIT_ERR "An invalid unit has been entered."
-#define UNIT_LIST "The workbench can work with measurements in the following units:"
-#define UNIT_SMA "Length: "
-#define UNIT_PER "Time: "
-#define UNIT_MASS "Mass: "
 
 /* enumerations, prototypes and other useful definitions */
 enum conversion_type {sma_period, period_sma, conv_error};
 typedef enum conversion_type convtype;
 convtype get_conv(char *arg);
+void print_unit_info();
 
 /* MAIN FUNCTION
  * Takes the following arguments:
@@ -76,11 +72,7 @@ int main (int argc, char *argv[])
 			pu = parse_per_unit(argv[2]);
 			break;
 		default:
-			printf("%s\n",UNIT_ERR);
-			printf("%s\n",UNIT_LIST);
-			printf("%s%s\n",UNIT_SMA,supported_sma_units());
-			printf("%s%s\n",UNIT_PER,supported_per_units());
-			printf("%s%s\n",UNIT_MASS,supported_mass_units());
+			print_unit_info();		
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -106,11 +98,7 @@ int main (int argc, char *argv[])
 			nc = convert_perunit(n,pu,seconds);
 			break;
 		default:
-			printf("%s\n",UNIT_ERR);
-			printf("%s\n",UNIT_LIST);
-			printf("%s%s\n",UNIT_SMA,supported_sma_units());
-			printf("%s%s\n",UNIT_PER,supported_per_units());
-			printf("%s%s\n",UNIT_MASS,supported_mass_units());
+			print_unit_info();		
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -128,11 +116,7 @@ int main (int argc, char *argv[])
 			r = sma(nc,hc,cc);
 			break;
 		default:
-			printf("%s\n",UNIT_ERR);
-			printf("%s\n",UNIT_LIST);
-			printf("%s%s\n",UNIT_SMA,supported_sma_units());
-			printf("%s%s\n",UNIT_PER,supported_per_units());
-			printf("%s%s\n",UNIT_MASS,supported_mass_units());
+			print_unit_info();		
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -150,11 +134,7 @@ int main (int argc, char *argv[])
 			rc = convert_smaunit(r,m,su);
 			break;
 		default:
-			printf("%s\n",UNIT_ERR);
-			printf("%s\n",UNIT_LIST);
-			printf("%s%s\n",UNIT_SMA,supported_sma_units());
-			printf("%s%s\n",UNIT_PER,supported_per_units());
-			printf("%s%s\n",UNIT_MASS,supported_mass_units());
+			print_unit_info();		
 			printf("%s\n",HELP_STR);
 			return 0;
 	}
@@ -193,4 +173,21 @@ convtype get_conv(char *arg)
 
 	/* if we get here, no valid unit was entered */
 	return r;
+}
+
+/* Prints unit info and frees supported unit strings
+ */
+void print_unit_info()
+{
+	char *sup_sma = supported_sma_units();
+	char *sup_per = supported_per_units();
+	char *sup_mass = supported_mass_units();
+	printf("%s\n","An invalid unit was entered, please try again with a different measurement.");
+	printf("%s\n","The workbench can work with measurements in the following units:");
+	printf("%s%s\n","Length: ",supported_sma_units());
+	printf("%s%s\n","Time: ",supported_per_units());
+	printf("%s%s\n","Mass: ",supported_mass_units());
+	free(sup_sma);
+	free(sup_per);
+	free(sup_mass);
 }
