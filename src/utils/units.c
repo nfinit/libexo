@@ -104,7 +104,7 @@ mass_T parse_mass_unit(char *arg)
 
 /* Convert between units of distance in semimajor axes
  */
-double convert_length_T(double sma, length_T in, length_T out)
+double convert_length(double sma, length_T in, length_T out)
 {
 	/* check if the provided unit was out of bounds */
 	if (in < 0 || in > NUM_SMA_UNITS) {
@@ -122,7 +122,7 @@ double convert_length_T(double sma, length_T in, length_T out)
 
 /* Convert between units of time in orbital periods
  */
-double convert_time_T(double per, time_T in, time_T out)
+double convert_time(double per, time_T in, time_T out)
 {
 	/* check if the provided unit was out of bounds */
         if (in < 0 || in > NUM_PER_UNITS) {
@@ -140,7 +140,7 @@ double convert_time_T(double per, time_T in, time_T out)
 
 /* Convert between units of mass
  */
-double convert_mass_T(double mass, mass_T in, mass_T out)
+double convert_mass(double mass, mass_T in, mass_T out)
 {
 	/* check if the provided unit was out of bounds */
 	if (in < 0 || in > NUM_MASS_UNITS) {

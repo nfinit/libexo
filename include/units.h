@@ -12,22 +12,22 @@
  */
 
 /* UNIT ENUMERATIONS */
-enum sma_unit {AU, km, m, NO_SMA_UNIT};
-enum per_unit {years, days, hours, minutes, seconds, NO_PER_UNIT};
+enum length_unit {AU, km, m, NO_SMA_UNIT};
+enum time_unit {years, days, hours, minutes, seconds, NO_PER_UNIT};
 enum mass_unit {kg, Me, Mj, Msun, NO_MASS_UNIT};
 
 /* UNIT ENUMERATION TYPEDEFS */
-typedef enum sma_unit length_T;
-typedef enum per_unit time_T;
+typedef enum length_unit length_T;
+typedef enum time_unit time_T;
 typedef enum mass_unit mass_T;
 
 /* GENERAL PROTOTYPES */
 length_T parse_sma_unit(char *arg);
 time_T parse_per_unit(char *arg);
 mass_T parse_mass_unit(char *arg);
-double convert_length_T(double sma, length_T in, length_T out);
-double convert_time_T(double per, time_T in, time_T out);
-double convert_mass_T(double mass, mass_T in, mass_T out);
+double convert_length(double sma, length_T in, length_T out);
+double convert_time(double per, time_T in, time_T out);
+double convert_mass(double mass, mass_T in, mass_T out);
 char *supported_sma_units();
 char *supported_per_units();
 char *supported_mass_units();

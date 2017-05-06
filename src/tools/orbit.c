@@ -92,10 +92,10 @@ int main (int argc, char *argv[])
 	/* convert primary value to proper argument for computation */
 	switch (conv) {
 		case sma_period:
-			nc = convert_length_T(n,su,m);
+			nc = convert_length(n,su,m);
 			break;
 		case period_sma:
-			nc = convert_time_T(n,pu,seconds);
+			nc = convert_time(n,pu,seconds);
 			break;
 		default:
 			print_unit_info();		
@@ -104,8 +104,8 @@ int main (int argc, char *argv[])
 	}
 
 	/* convert host/companion masses to kilograms */
-	hc = convert_mass_T(hm,hu,kg);
-	cc = convert_mass_T(cm,cu,kg);
+	hc = convert_mass(hm,hu,kg);
+	cc = convert_mass(cm,cu,kg);
 
 	/* compute result */
 	switch (conv) {
@@ -126,12 +126,12 @@ int main (int argc, char *argv[])
 		case sma_period:
 			pu = select_time_T(r);
 			out_str = time_T_string(pu);
-			rc = convert_time_T(r,seconds,pu);
+			rc = convert_time(r,seconds,pu);
 			break;
 		case period_sma:
 			su = select_length_T(r);
 			out_str = length_T_string(su);
-			rc = convert_length_T(r,m,su);
+			rc = convert_length(r,m,su);
 			break;
 		default:
 			print_unit_info();		
