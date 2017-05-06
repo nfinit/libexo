@@ -17,21 +17,21 @@ enum per_unit {years, days, hours, minutes, seconds, NO_PER_UNIT};
 enum mass_unit {kg, Me, Mj, Msun, NO_MASS_UNIT};
 
 /* UNIT ENUMERATION TYPEDEFS */
-typedef enum sma_unit smaunit;
-typedef enum per_unit perunit;
-typedef enum mass_unit massunit;
+typedef enum sma_unit length_T;
+typedef enum per_unit time_T;
+typedef enum mass_unit mass_T;
 
 /* GENERAL PROTOTYPES */
-smaunit parse_sma_unit(char *arg);
-perunit parse_per_unit(char *arg);
-massunit parse_mass_unit(char *arg);
-double convert_smaunit(double sma, smaunit in, smaunit out);
-double convert_perunit(double per, perunit in, perunit out);
-double convert_massunit(double mass, massunit in, massunit out);
+length_T parse_sma_unit(char *arg);
+time_T parse_per_unit(char *arg);
+mass_T parse_mass_unit(char *arg);
+double convert_length_T(double sma, length_T in, length_T out);
+double convert_time_T(double per, time_T in, time_T out);
+double convert_mass_T(double mass, mass_T in, mass_T out);
 char *supported_sma_units();
 char *supported_per_units();
 char *supported_mass_units();
-perunit select_perunit(double p);
-smaunit select_smaunit(double s);
-char *perunit_string(perunit p);
-char *smaunit_string(smaunit s);
+time_T select_time_T(double p);
+length_T select_length_T(double s);
+char *time_T_string(time_T p);
+char *length_T_string(length_T s);

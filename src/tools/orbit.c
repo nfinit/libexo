@@ -51,10 +51,10 @@ int main (int argc, char *argv[])
 	double r = 0.0; /* computation result */
 	double rc = 0.0; /* human-readable computation result */
 	convtype conv = conv_error; /* calculation/conversion to perform */
-	smaunit su = NO_SMA_UNIT; /* unit of the primary value if SmA */
-	perunit pu = NO_PER_UNIT; /* unit of the primary value if period */
-	massunit hu = NO_MASS_UNIT; /* units of the host mass */
-	massunit cu = NO_MASS_UNIT; /* units of the companion mass */
+	length_T su = NO_SMA_UNIT; /* unit of the primary value if SmA */
+	time_T pu = NO_PER_UNIT; /* unit of the primary value if period */
+	mass_T hu = NO_MASS_UNIT; /* units of the host mass */
+	mass_T cu = NO_MASS_UNIT; /* units of the companion mass */
 	char *out_str;
 
 	/* parse number to convert */
@@ -92,10 +92,10 @@ int main (int argc, char *argv[])
 	/* convert primary value to proper argument for computation */
 	switch (conv) {
 		case sma_period:
-			nc = convert_smaunit(n,su,m);
+			nc = convert_length_T(n,su,m);
 			break;
 		case period_sma:
-			nc = convert_perunit(n,pu,seconds);
+			nc = convert_time_T(n,pu,seconds);
 			break;
 		default:
 			print_unit_info();		
@@ -104,8 +104,8 @@ int main (int argc, char *argv[])
 	}
 
 	/* convert host/companion masses to kilograms */
-	hc = convert_massunit(hm,hu,kg);
-	cc = convert_massunit(cm,cu,kg);
+	hc = convert_mass_T(hm,hu,kg);
+	cc = convert_mass_T(cm,cu,kg);
 
 	/* compute result */
 	switch (conv) {
@@ -124,14 +124,14 @@ int main (int argc, char *argv[])
 	/* convert result */
 	switch (conv) {
 		case sma_period:
-			pu = select_perunit(r);
-			out_str = perunit_string(pu);
-			rc = convert_perunit(r,seconds,pu);
+			pu = select_time_T(r);
+			out_str = time_T_string(pu);
+			rc = convert_time_T(r,seconds,pu);
 			break;
 		case period_sma:
-			su = select_smaunit(r);
-			out_str = smaunit_string(su);
-			rc = convert_smaunit(r,m,su);
+			su = select_length_T(r);
+			out_str = length_T_string(su);
+			rc = convert_length_T(r,m,su);
 			break;
 		default:
 			print_unit_info();		
@@ -151,8 +151,8 @@ int main (int argc, char *argv[])
 convtype get_conv(char *arg)
 {
 	/* declare variables */
-	smaunit s = NO_SMA_UNIT;
-	perunit p = NO_PER_UNIT;
+	length_T s = NO_SMA_UNIT;
+	time_T p = NO_PER_UNIT;
 	convtype r = conv_error;
 
 	/* attempt to parse an SMA first */ 

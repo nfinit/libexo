@@ -16,11 +16,11 @@
 
 /* Parse a string to an SmA unit
  */
-smaunit parse_sma_unit(char *arg)
+length_T parse_sma_unit(char *arg)
 {
 	/* declare variables */
 	int i;
-	smaunit r;
+	length_T r;
 
 	/* iterate through SMA unit array */
 	for (i = 0; i < NUM_SMA_UNITS; i++)
@@ -44,11 +44,11 @@ smaunit parse_sma_unit(char *arg)
 
 /* Parse a string to a period unit
  */
-perunit parse_per_unit(char *arg)
+time_T parse_per_unit(char *arg)
 {
 	/* declare variables */
 	int i;
-	perunit r;
+	time_T r;
 
 	/* iterate through period unit array */
 	for (i = 0; i < NUM_PER_UNITS; i++)
@@ -73,11 +73,11 @@ perunit parse_per_unit(char *arg)
 
 /* Parse a string to a mass unit
  */
-massunit parse_mass_unit(char *arg)
+mass_T parse_mass_unit(char *arg)
 {
 	/* declare variables */
 	int i;
-	massunit r;
+	mass_T r;
 
 	/* iterate through mass unit array */
 	for (i = 0; i < NUM_MASS_UNITS; i++)
@@ -104,7 +104,7 @@ massunit parse_mass_unit(char *arg)
 
 /* Convert between units of distance in semimajor axes
  */
-double convert_smaunit(double sma, smaunit in, smaunit out)
+double convert_length_T(double sma, length_T in, length_T out)
 {
 	/* check if the provided unit was out of bounds */
 	if (in < 0 || in > NUM_SMA_UNITS) {
@@ -122,7 +122,7 @@ double convert_smaunit(double sma, smaunit in, smaunit out)
 
 /* Convert between units of time in orbital periods
  */
-double convert_perunit(double per, perunit in, perunit out)
+double convert_time_T(double per, time_T in, time_T out)
 {
 	/* check if the provided unit was out of bounds */
         if (in < 0 || in > NUM_PER_UNITS) {
@@ -140,7 +140,7 @@ double convert_perunit(double per, perunit in, perunit out)
 
 /* Convert between units of mass
  */
-double convert_massunit(double mass, massunit in, massunit out)
+double convert_mass_T(double mass, mass_T in, mass_T out)
 {
 	/* check if the provided unit was out of bounds */
 	if (in < 0 || in > NUM_MASS_UNITS) {
@@ -218,7 +218,7 @@ char *supported_mass_units()
 
 /* Automatically selects a unit based on an input in seconds
  */
-perunit select_perunit(double p)
+time_T select_time_T(double p)
 {
 	if (p < per_table[minutes][seconds]) return seconds;
 	if (p < per_table[hours][seconds]) return minutes;
@@ -229,7 +229,7 @@ perunit select_perunit(double p)
 
 /* Automatically selects a unit based on an input in meters
  */
-smaunit select_smaunit(double s)
+length_T select_length_T(double s)
 {
 	if (s < sma_table[km][m]) return m;
 	if (s < (sma_table[AU][m] * 0.05)) return km;
@@ -239,7 +239,7 @@ smaunit select_smaunit(double s)
 /* Gets a string corresponding to the given unit from the 
  * main time measurement string array
  */
-char *perunit_string(perunit p)
+char *time_T_string(time_T p)
 {
 	if (p < 0) return per_units[0];
 	if (p >= NUM_PER_UNITS) return per_units[NUM_PER_UNITS-1];
@@ -249,7 +249,7 @@ char *perunit_string(perunit p)
 /* Gets a string corresponding to the given unit from the 
  * main length measurement string array
  */
-char *smaunit_string(smaunit s)
+char *length_T_string(length_T s)
 {
 	if (s < 0) return sma_units[0];
 	if (s >= NUM_SMA_UNITS) return sma_units[NUM_SMA_UNITS-1];
