@@ -1,5 +1,6 @@
 #!/bin/sh
 # CLI toolkit build script for quick testing
+# Minor incompatibilities with bash, but still works acceptably
 # Compiler settings, adjust for your operating system
 CC=gcc
 CFLAGS="-lm -Wall"
