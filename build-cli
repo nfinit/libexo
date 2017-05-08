@@ -1,0 +1,21 @@
+#!/bin/sh
+# CLI toolkit build script for quick testing
+# Compiler settings, adjust for your operating system
+CC=gcc
+CFLAGS="-lm -Wall"
+# Check if the clean flag has been selected to remove binaries
+if [ $1 = "clean" ]
+then
+	echo -n "Removing binaries..."
+	rm -rf ./bin
+	echo "done"
+	exit
+fi
+# Clear screen to show build status
+clear
+# Build the orbital characterization tool
+echo -n "Building orbital characterization tool..."
+$CC $CFLAGS src/tools/orbit.c src/utils/units.c src/math/orbits.c -o orbit
+mkdir -p bin
+mv orbit bin
+echo "done"
