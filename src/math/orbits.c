@@ -86,3 +86,25 @@ double mass(double sma, double period)
 	/* return combined mass (in kilograms) */
 	return m;
 }
+
+/* PERIHELION DISTANCE:
+ * Unit-agnostic function that calculates the distance of a celestial
+ * body to its host at perihelion based on its semimajor axis and eccentricity
+ */
+double perihelion(double sma, double e)
+{
+	double r;
+	r = sma * (1.0 - e);
+	return r;
+}
+
+/* APHELION DISTANCE:
+ * Unit-agnostic function that calculates the distance of a celestial
+ * body to its host at aphelion based on its semimajor axis and eccentricity
+ */
+double aphelion(double sma, double e)
+{
+	double r;
+	r = sma * (1.0 + e);
+	return r;
+}

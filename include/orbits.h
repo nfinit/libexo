@@ -17,3 +17,5 @@
 double period(double sma, double hostmass, double satmass);
 double sma(double period, double hostmass, double satmass);
 double mass(double sma, double period);
+double perihelion(double sma, double e);
+double aphelion(double sma, double e);

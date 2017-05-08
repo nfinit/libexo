@@ -20,10 +20,14 @@
 #define HELP_STR "usage: \
 <number> <unit> \
 <host mass> <unit> \
-<companion mass> <unit>"
+<companion mass> <unit>\n\
+       \
+<number> <unit> \
+<\"perihelion\"|\"aphelion\"> \
+<eccentricity> \'e\'"
 
 /* enumerations, prototypes and other useful definitions */
-enum conversion_type {sma_period, period_sma, conv_error};
+enum conversion_type {sma_period, period_sma, e_peri, e_aph, conv_error};
 typedef enum conversion_type convtype;
 convtype get_conv(char *arg);
 void print_unit_info();
@@ -31,6 +35,7 @@ void print_unit_info();
 /* MAIN FUNCTION
  * Takes the following arguments:
  * <number> <unit> <host mass> <unit> <companion mass> <unit>
+ * <number> <unit> <perihelion|aphelion> <eccentricity> 'e'
  */
 int main (int argc, char *argv[])
 {
@@ -51,6 +56,7 @@ int main (int argc, char *argv[])
 	double r = 0.0; /* computation result */
 	double rc = 0.0; /* human-readable computation result */
 	convtype conv = conv_error; /* calculation/conversion to perform */
+	convtype conv_e = conv_error; /* check for eccentricity conversions */
 	length_T su = NO_SMA_UNIT; /* unit of the primary value if SmA */
 	time_T pu = NO_PER_UNIT; /* unit of the primary value if period */
 	mass_T hu = NO_MASS_UNIT; /* units of the host mass */
@@ -62,6 +68,7 @@ int main (int argc, char *argv[])
 
 	/* determine conversion type */
 	conv = get_conv(argv[2]);
+	conv_e = get_conv(argv[3]);
 
 	/* parse first unit of input */
 	switch (conv) {
