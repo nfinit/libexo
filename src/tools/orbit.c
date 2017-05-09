@@ -22,7 +22,7 @@
 <host mass> <unit> \
 <companion mass> <unit>\n\
        \
-<number> <unit> \
+<SmA> <unit> \
 <\"perihelion\"|\"aphelion\"> \
 <eccentricity>"
 

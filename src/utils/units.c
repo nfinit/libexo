@@ -223,7 +223,7 @@ time_T select_time_T(double p)
 	if (p < per_table[minutes][seconds]) return seconds;
 	if (p < per_table[hours][seconds]) return minutes;
 	if (p < per_table[days][seconds]) return hours;
-	if (p < (per_table[years][seconds] * 0.6)) return days;
+	if (p < per_table[years][seconds]) return days;
 	return years;
 }
 
