@@ -14,12 +14,11 @@ The Workbench is developed with the following basic goals in mind:
 
 The workbench will be able to infer a number of properties based on known data, entries in the following list that have been crossed out have been implemented:
 
-* Orbital characterization
+* ~~Orbital characterization~~ *(5/8/17)*
 	* ~~Semimajor axis~~ *(5/4/17)*
 	* ~~Orbital period~~ *(5/4/17)*
-	* Eccentricity
-	* Inclination
-	* Perihelion/aphelion distances
+	* ~~Eccentricity~~ *(5/8/17)*
+	* ~~Perihelion/aphelion distances~~ *(5/8/17)*
 * Climate characterization
 	* Baseline equilibrium, periastron, aphelion temperatures
 * Physical characterization
