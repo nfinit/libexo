@@ -226,9 +226,9 @@ void print_unit_info()
 	char *sup_mass = supported_mass_units();
 	printf("%s\n","An invalid unit was entered, please try again with a different measurement.");
 	printf("%s\n","The workbench can work with measurements in the following units:");
-	printf("%s%s\n","Length: ",supported_sma_units());
-	printf("%s%s\n","Time: ",supported_per_units());
-	printf("%s%s\n","Mass: ",supported_mass_units());
+	printf("%s%s\n","Length: ", sup_sma);
+	printf("%s%s\n","Time: ", sup_per);
+	printf("%s%s\n","Mass: ", sup_mass);
 	free(sup_sma);
 	free(sup_per);
 	free(sup_mass);
