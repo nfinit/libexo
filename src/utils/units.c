@@ -94,12 +94,37 @@ mass_T parse_mass_unit(char *arg)
 		} else {
 			r = NO_MASS_UNIT;
 		}
-		
 	}
 
 	/* return result */
 	return r;
 
+}
+
+/* Parse a string to a temperature unit
+ */
+temp_T parse_temp_unit(char *arg)
+{
+	/* declare variables */
+	int i;
+	temp_T r;
+
+	/* iterate through the temperature unit array */
+	for (i = 0; i < NUM_TEMP_UNITS; i++)
+	{
+		if (strcmp(arg, temp_units[i]) == 0) {
+			r = i;
+			break;
+		} else if (strcmp(arg, temp_units[i+NUM_TEMP_UNITS]) == 0) {
+			r = i;
+			break;
+		} else {
+			r = NO_TEMP_UNIT;
+		}
+	}
+
+	/* return result */
+	return r;
 }
 
 /* Convert between units of distance in semimajor axes
@@ -156,6 +181,66 @@ double convert_mass(double mass, mass_T in, mass_T out)
 	return -1;
 }
 
+/* Convert between units of temperature
+ * This function does not utilize a lookup table
+ */
+double convert_temp(double temp, temp_T in, temp_T out)
+{
+	/* A switch and some constants take the place of a lookup table
+	 * in this function.
+	 */
+	#define ABS_ZERO -273.15
+	#define F_MULTI 1.8
+	#define ZEROC 32
+	
+	switch(in)
+	{
+		case KELVIN:
+			switch(out)
+			{
+				case KELVIN:
+					return temp;
+				case CELSIUS:
+					return temp+ABS_ZERO;
+				case FAHRENHEIT:
+					return (temp+ABS_ZERO)*F_MULTI+ZEROC;
+				default: 
+					return -1;
+			}
+		case CELSIUS:
+			switch(out)
+			{
+				case KELVIN:
+					return temp-ABS_ZERO;
+				case CELSIUS:
+					return temp;
+				case FAHRENHEIT:
+					return temp*F_MULTI;
+				default: 
+					return -1;
+			}
+		case FAHRENHEIT:
+			switch(out)
+			{
+				case KELVIN:
+					return ((temp-ZEROC)/F_MULTI)-ABS_ZERO;
+				case CELSIUS:
+					return (temp-ZEROC)/F_MULTI;
+				case FAHRENHEIT:
+					return temp;
+				default: 
+					return -1;
+			}
+		default:
+			return -1;
+	}
+
+	/* we shouldn't get here */
+	return -1;
+}
+
+/* Generate a string to show supported units
+ */
 char *supported_sma_units()
 {
 	/* declare variables */
@@ -176,6 +261,8 @@ char *supported_sma_units()
 	return r;	
 }
 
+/* Generate a string to show supported units
+ */
 char *supported_per_units()
 {
 	/* declare variables */
@@ -196,6 +283,8 @@ char *supported_per_units()
 	return r;	
 }
 
+/* Generate a string to show supported units
+ */
 char *supported_mass_units()
 {
 	/* declare variables */
@@ -212,6 +301,27 @@ char *supported_mass_units()
 		}
 	}
 
+	/* return completed string */
+	return r;	
+}
+
+/* Generate a string to show supported units
+ */
+char *supported_temp_units()
+{
+	/* declare variables */
+	int i;
+	char *r = malloc(80 * sizeof(char));
+
+	/* iterate through supported units */
+	for (i = 0; i < NUM_TEMP_UNITS; i++)
+	{
+		strcat(r, temp_units[i]);
+		if (i != NUM_TEMP_UNITS-1) {
+			if (strlen(r) + strlen(temp_units[i+1]) >= 80-1 ) break;			strcat(r, ", ");
+		}
+	}
+	
 	/* return completed string */
 	return r;	
 }

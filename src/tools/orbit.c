@@ -17,7 +17,8 @@
 #include "../../include/orbits.h"
 
 /* output string constants */
-#define HELP_STR "usage: \
+#define USAGE_STR "usage: \
+orbit \
 <number> <unit> \
 <host mass> <unit> \
 <companion mass> <unit>\n\
@@ -42,7 +43,7 @@ int main (int argc, char *argv[])
 	/* check that proper arguments have been supplied */
 	if (argc < 5 || argc > 7) 
 	{
-		printf("%s\n",HELP_STR);
+		printf("%s\n",USAGE_STR);
 		return 0;
 	}
 
@@ -68,12 +69,19 @@ int main (int argc, char *argv[])
 
 	/* determine conversion type */
 	conv = get_conv(argv[3]); /* check for eccentricity */
-	if (conv == conv_error) conv = get_conv(argv[2]);
+	if (conv == conv_error) {
+		if (argc < 7)
+		{
+			printf("%s\n",USAGE_STR);
+			return 0;
+		}
+		conv = get_conv(argv[2]);
+	}
 
 	/* parse first unit of input */
 	switch (conv) {
 		case sma_period:
-			su = parse_sma_unit(argv[2]);				
+			su = parse_sma_unit(argv[2]);
 			break;
 		case period_sma:
 			pu = parse_per_unit(argv[2]);
@@ -88,7 +96,7 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			print_unit_info();		
-			printf("%s\n",HELP_STR);
+			printf("%s\n",USAGE_STR);
 			return 0;
 	}
 
@@ -120,7 +128,7 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			print_unit_info();		
-			printf("%s\n",HELP_STR);
+			printf("%s\n",USAGE_STR);
 			return 0;
 	}
 
@@ -144,7 +152,7 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			print_unit_info();		
-			printf("%s\n",HELP_STR);
+			printf("%s\n",USAGE_STR);
 			return 0;
 	}
 
@@ -170,7 +178,7 @@ int main (int argc, char *argv[])
 			break;
 		default:
 			print_unit_info();		
-			printf("%s\n",HELP_STR);
+			printf("%s\n",USAGE_STR);
 			return 0;
 	}
 

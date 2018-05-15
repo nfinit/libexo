@@ -1,3 +1,6 @@
+#ifndef _PWB_ORBITS_H_
+#define _PWB_ORBITS_H_
+
 /* PWB ORBITAL UTILITIES HEADER
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
@@ -19,3 +22,5 @@ double sma(double period, double hostmass, double satmass);
 double mass(double sma, double period);
 double perihelion(double sma, double e);
 double aphelion(double sma, double e);
+
+#endif
