@@ -1,4 +1,0 @@
-#!/bin/sh
-# Invokes the PWB makefile
-cd src
-make $1

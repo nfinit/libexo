@@ -1,7 +1,7 @@
-#ifndef _PWB_ARRAY_UNITS_H_
-#define _PWB_ARRAY_UNITS_H_
+#ifndef _EXO_ARRAY_UNITS_H_
+#define _EXO_ARRAY_UNITS_H_
 
-/* PWB UNIT CONVERSION DEFINITION ARRAYS
+/* LIBEXO UNIT CONVERSION DEFINITION ARRAYS
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)

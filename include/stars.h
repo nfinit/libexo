@@ -1,7 +1,7 @@
-#ifndef _PWB_STARS_H_
-#define _PWB_STARS_H_
+#ifndef _EXO_STARS_H_
+#define _EXO_STARS_H_
 
-/* PWB STELLAR UTILITY DEFINITIONS 
+/* LIBEXO STELLAR UTILITY DEFINITIONS 
  *
  * Revision I (01/18) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)

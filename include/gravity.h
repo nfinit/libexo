@@ -1,7 +1,7 @@
-#ifndef _PWB_GRAVITY_H_
-#define _PWB_GRAVITY_H_
+#ifndef _EXO_GRAVITY_H_
+#define _EXO_GRAVITY_H_
 
-/* PWB GRAVITY UTILITIES HEADER
+/* LIBEXO GRAVITY UTILITIES HEADER
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)

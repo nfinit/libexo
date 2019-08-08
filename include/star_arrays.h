@@ -1,7 +1,7 @@
-#ifndef _PWB_ARRAY_STARS_H_
-#define _PWB_ARRAY_STARS_H_
+#ifndef _EXO_ARRAY_STARS_H_
+#define _EXO_ARRAY_STARS_H_
 
-/* PWB STELLAR UTILITY ARRAYS
+/* LIBEXO STELLAR UTILITY ARRAYS
  *
  * Revision I (01/18) (C) NFINIT Systems 2018
  * Author: ict (ict@nfinit.systems)
@@ -25,5 +25,16 @@ double SPECTRAL_TEMP[] = {33000,10000,7500,6000,5200,3700,2400,1300,550,0,-1};
 
 /* MK TYPE STRINGS */
 char* SPECTRAL_STR[] = {"O","B","A","F","G","K","M","L","T","Y","NO TYPE"};
+
+/* SPECTRAL TYPE MASS BOUNDARIES
+ * An array of boundaries corresponding to the minimum masses of each
+ * spectral type that can be indexed by the spectype_T enumeration
+ * As a star's mass is not really a reliable way of determining its type,
+ * this array serves more as a way of roughly but somewhat plausibly
+ * filling in "blanks" on generated or poorly characterized objects
+ * whose masses are unknown but have otherwise been assigned classification.
+ */
+
+ /*TODO: Create mass boundary array*/
 
 #endif

@@ -1,7 +1,7 @@
-#ifndef _PWB_UNITS_H_
-#define _PWB_UNITS_H_
+#ifndef _EXO_UNITS_H_
+#define _EXO_UNITS_H_
 
-/* PWB UNIT CONVERSION DEFINITIONS
+/* LIBEXO UNIT CONVERSION DEFINITIONS
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)

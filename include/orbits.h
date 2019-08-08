@@ -1,7 +1,7 @@
-#ifndef _PWB_ORBITS_H_
-#define _PWB_ORBITS_H_
+#ifndef _EXO_ORBITS_H_
+#define _EXO_ORBITS_H_
 
-/* PWB ORBITAL UTILITIES HEADER
+/* LIBEXO ORBITAL UTILITIES HEADER
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)

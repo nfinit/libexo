@@ -1,4 +1,7 @@
-/* PWB CONSTANT DEFINITIONS
+#ifndef _EXO_CONSTANTS_H_
+#define _EXO_CONSTANTS_H_
+
+/* LIBEXO CONSTANT DEFINITIONS
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)
@@ -26,4 +29,6 @@
  */
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
+#endif
+
 #endif
