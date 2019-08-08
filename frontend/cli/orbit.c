@@ -13,8 +13,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../include/units.h"
-#include "../../include/orbits.h"
+#include "units.h"
+#include "orbits.h"
 
 /* output string constants */
 #define USAGE_STR "usage: \
@@ -40,6 +40,18 @@ void print_unit_info();
  */
 int main (int argc, char *argv[])
 {
+	/* variable declaration and initialization */
+	double e; 	/* eccentricity */
+	double n, nc; 	/* primary value to evaluate and converted value */
+	double hm, cm; 	/* host and companion mass */
+	double hc, cc; 	/* host and companion mass in kilograms */
+	double r, rc; 	/* computation result, and human-readable result */
+	conv_T conv; 	/* calculation/conversion to perform */
+	length_T su; 	/* unit of the primary value if SmA */
+	time_T pu; 	/* unit of the primary value if period */
+	mass_T hu, cu; 	/* units of the host and companion masses */
+	char *out_str;
+
 	/* check that proper arguments have been supplied */
 	if (argc < 5 || argc > 7) 
 	{
@@ -47,22 +59,12 @@ int main (int argc, char *argv[])
 		return 0;
 	}
 
-	/* variable declaration and initialization */
-	double e = 0.0; /* eccentricity */
-	double n = 0.0; /* primary value to evaluate */
-	double nc = 0.0; /* converted value (into seconds or meters) */
-	double hm = 0.0; /* host mass */
-	double hc = 0.0; /* host mass in kilograms */
-	double cm = 0.0; /* companion mass */
-	double cc = 0.0; /* companion mass in kilograms */
-	double r = 0.0; /* computation result */
-	double rc = 0.0; /* human-readable computation result */
-	conv_T conv = conv_error; /* calculation/conversion to perform */
-	length_T su = NO_SMA_UNIT; /* unit of the primary value if SmA */
-	time_T pu = NO_PER_UNIT; /* unit of the primary value if period */
-	mass_T hu = NO_MASS_UNIT; /* units of the host mass */
-	mass_T cu = NO_MASS_UNIT; /* units of the companion mass */
-	char *out_str;
+	/* variable initialization */
+	e = n = nc = hm = hc = cm = cc = r = rc = 0.0;
+	conv = conv_error;
+	su = NO_SMA_UNIT;
+	pu = NO_PER_UNIT;
+	hu = cu = NO_MASS_UNIT;
 
 	/* parse number to convert */
 	n = atof(argv[1]);

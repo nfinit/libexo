@@ -1,4 +1,4 @@
-/* PWB GENERAL UTILITIES
+/* LIBEXO GENERAL UTILITIES
 * Stellar characterization and generation
 *
 * Revision I (01/18) (C) NFINIT Systems 2018
@@ -9,8 +9,8 @@
 */
 
 #include <stdlib.h>
-#include "../../include/stars.h"
-#include "../../include/star_arrays.h"
+#include "stars.h"
+#include "star_arrays.h"
 
 /* External definitions */
 extern double SPECTRAL_TEMP[];
@@ -56,7 +56,8 @@ int infer_subtype(double temperature, temp_T unit, spectype_T type)
 	f = 10;
 	if (type == O) f = 10-EARLY_O;
 	/* Divide the range into f equal segments */
-		d = r/f;
+	d = r/f;
+	
 	/* Determine subtype by testing the input against
          * successive intervals
 	 */

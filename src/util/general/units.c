@@ -1,4 +1,4 @@
-/* PWB GENERAL UTILITIES
+/* LIBEXO GENERAL UTILITIES
  * Unit parsing and conversion
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
@@ -8,11 +8,10 @@
  * supported units
  */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../include/units.h"
-#include "../../include/unit_arrays.h"
+#include "units.h"
+#include "unit_arrays.h"
 
 /* Parse a string to an SmA unit
  */

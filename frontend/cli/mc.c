@@ -1,4 +1,4 @@
-/* PWB COMMAND-LINE FRONTEND UTILITIES
+/* LIBEXO COMMAND-LINE FRONTEND UTILITIES
  * Mass unit conversion utility
  *
  * Revision I (01/18) (C) NFINIT Systems 2017
@@ -7,7 +7,7 @@
  * This program allows the user to convert between a number of mass units
  * including Earth masses, Jupiter masses and Solar masses.
  *
- * Based on the revision II PWB driver foundation.
+ * Based on the revision II libexo driver foundation.
  */
 
 /* includes */

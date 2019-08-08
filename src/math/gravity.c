@@ -1,4 +1,4 @@
-/* PWB GRAVITY UTILITIES
+/* LIBEXO GRAVITY UTILITIES
  *
  * Revision I (05/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)
@@ -14,7 +14,7 @@
  */
 
 #include <math.h>
-#include "../../include/constants.h"
+#include "constants.h"
 
 /* SURFACE GRAVITY FROM MASS+RADIUS:
  * Derives the surface gravity in meters per second squared of an 
@@ -22,7 +22,7 @@
  */
 double surface_gravity(double mass, double radius) 
 {
-	return CONST_G * mass / (radius * radius);
+	return CONST_G * (mass / (radius * radius));
 }
 
 /* RADIUS FROM SURFACE GRAVITY+MASS:
@@ -32,7 +32,7 @@ double surface_gravity(double mass, double radius)
  */
 double radius_sg(double mass, double sg)
 {
-	return pow(CONST_G * mass / sg, 1.0 / 2.0);	 
+	return pow(CONST_G * (mass / sg), 1.0 / 2.0);	 
 }
 
 /* MASS FROM SURFACE GRAVITY+RADIUS:

@@ -1,4 +1,4 @@
-/* PWB ORBITAL UTILITIES
+/* LIBEXO ORBITAL UTILITIES
  *
  * Revision I (04/17) (C) NFINIT Systems 2017
  * Author: ict (ict@nfinit.systems)
@@ -14,7 +14,7 @@
  */
 
 #include <math.h>
-#include "../../include/constants.h"
+#include "constants.h"
 
 /* SEMIMAJOR AXIS+COMBINED MASS TO ORBITAL PERIOD:
  * Converts an orbit's semimajor axis (in meters) to an

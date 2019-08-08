@@ -12,7 +12,7 @@
 /* includes */
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../include/stars.h"
+#include "stars.h"
 
 /* useful definitions */
 #define MIN_ARGS 3
