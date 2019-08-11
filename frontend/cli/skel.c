@@ -1,4 +1,4 @@
-/* PWB COMMAND-LINE FRONTEND UTILITIES
+/* LIBEXO COMMAND-LINE FRONTEND UTILITIES
  * <name/description of utility>
  *
  * Revision II (01/18) (C) NFINIT Systems 2018
@@ -6,7 +6,7 @@
  *
  * <long description of utility>
  *
- * Based on the revision II PWB driver foundation (skel.c)
+ * Based on the revision II libexo driver foundation (skel.c)
  */
 
 /* includes */

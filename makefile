@@ -1,6 +1,6 @@
 ### LIBEXO MAKEFILE -------------------------------------------------------- ###
-CC=gcc
-OFLAGS=-O2
+CC=cc -Aa
+OFLAGS=+O2
 LFLAGS=-lm
 # ---------------------------------------------------------------------------- #
 SDIR=./src
@@ -10,7 +10,7 @@ ODIR=./obj
 BDIR=./bin
 # ---------------------------------------------------------------------------- #
 DFLAGS=-I$(IDIR) -L$(LDIR)
-CFLAGS=-ansi $(OFLAGS) $(LFLAGS) $(DFLAGS)
+CFLAGS=$(OFLAGS) $(LFLAGS) $(DFLAGS)
 # ---------------------------------------------------------------------------- #
 FRONTEND=./frontend
 FRONTEND_CLI=$(FRONTEND)/cli
@@ -20,17 +20,18 @@ UTIL=$(SDIR)/util
 UTIL_GEN=$(UTIL)/general
 UTIL_AST=$(UTIL)/astro
 # ---------------------------------------------------------------------------- #
-MATH_OBJ=$(MATH)/orbits.o $(MATH)/gravity.o
+MATH_OBJ=$(MATH)/orbits.o $(MATH)/gravity.o $(MATH)/stars.o
 UTIL_OBJ_GENERAL=$(UTIL_GEN)/units.o
-UTIL_OBJ_ASTRO=$(UTIL_AST)/stars.o
+UTIL_OBJ_ASTRO=$(UTIL_AST)/star_utils.o
 # ---------------------------------------------------------------------------- #
 ORBIT_FRONTEND_IN=$(FRONTEND_CLI)/orbit.c
 SPECTYPE_FRONTEND_IN=$(FRONTEND_CLI)/spectype.c
 TC_FRONTEND_IN=$(FRONTEND_CLI)/tc.c
 MC_FRONTEND_IN=$(FRONTEND_CLI)/mc.c
+BCV_FRONTEND_IN=$(FRONTEND_CLI)/bcv.c
 # ---------------------------------------------------------------------------- #
 all: libs cli
-cli: spectype_cli orbit_cli tc_cli mc_cli
+cli: spectype_cli orbit_cli tc_cli mc_cli bcv_cli
 spectype_cli: libs
 	$(CC) $(CFLAGS) $(LFLAGS) $(SPECTYPE_FRONTEND_IN) -lexo -o spectype
 	mv spectype $(BDIR) 
@@ -43,6 +44,9 @@ tc_cli: libs
 mc_cli: libs
 	$(CC) $(CFLAGS) $(LFLAGS) $(MC_FRONTEND_IN) -lexo -o mc
 	mv mc $(BDIR) 
+bcv_cli: libs
+	$(CC) $(CFLAGS) $(LFLAGS) $(BCV_FRONTEND_IN) -lexo -o bcv
+	mv bcv $(BDIR) 
 libs: dirs $(MATH_OBJ) $(UTIL_OBJ_GENERAL) $(UTIL_OBJ_ASTRO)
 	ar -cvq libexo.a *.o 
 	mv *.o $(ODIR)

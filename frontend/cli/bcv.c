@@ -1,11 +1,11 @@
 /* LIBEXO COMMAND-LINE FRONTEND UTILITIES
- * Spectral classifier
+ * Bolometric correction calculator
  *
  * Revision I (08/19) (C) NFINIT Systems 2019
  * Author: ict (ict@nfinit.systems)
  *
- * Determines a star's spectral type given its effective
- * temperature in C, F or K. 
+ * Derives a bolometric correction constant given a specified
+ * temperature. Accurate for Teff < 10,000 Kelvin 
  *
  * Based on the revision II PWB driver foundation (skel.c)
  */
@@ -19,7 +19,7 @@
 #define MIN_ARGS 3
 #define MAX_ARGS 3
 #define IN_RANGE(x) (x < MIN_ARGS || x > MAX_ARGS) 
-#define USAGE_STR "usage: spectype <temperature> <unit>"
+#define USAGE_STR "usage: bcv <temperature> <unit>"
 
 /* argument locations for quick redefinition */
 #define TEMP_IN 1
@@ -51,8 +51,7 @@ int main (int argc, char *argv[])
 {
 	double t;	/* input temperature */ 
 	temp_T iu; 	/* input temperature unit */
-	spectype_T s; 	/* derived spectral type */
-	int d; 		/* derived spectral subtype */
+	double bc; 	/* derived bolometric correction */
 
 	/* check that correct number of arguments have been supplied */
 	if (!check_args(argc)) { print_usage(); return 0; }
@@ -60,20 +59,17 @@ int main (int argc, char *argv[])
 	/* initialize variables */
 	t= 0.0;
 	iu = NO_TEMP_UNIT;
-	s = NO_TYPE;
-	d = 0;
-
+	bc = 0.0;
 
 	/* parse temperature value and unit */
 	t = atof(argv[TEMP_IN]);
 	iu = parse_temp_unit(argv[UNIT_IN]);
 
 	/* infer spectral type based on processed value */
-	s = infer_type(t,iu);
-	d = infer_subtype(t,iu,s);	
+	bc = bcv(t,iu);
 
 	/* print result */
-	printf("Spectral type: %s%d\n",spectype_T_string(s),d);
+	printf("BCV: %f\n",bc);
 
 	/* program is done, return status */
 	return 0;

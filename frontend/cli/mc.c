@@ -55,14 +55,18 @@ int check_args (int argc)
  */
 int main (int argc, char *argv[])
 {
+	/* variable declaration */
+	double m,v;
+	mass_T iu,ou;
+	
 	/* check that correct number of arguments have been supplied */
 	if (!check_args(argc)) { print_usage(); return 0; }
 
-	/* variable declaration and initialization */
-	double m = 0.0; /* input mass */
-	double v = 0.0; /* output mass */
-	mass_T iu = NO_MASS_UNIT; /* input unit */
-	mass_T ou = NO_MASS_UNIT; /* output unit */
+	/* variable initialization */
+	m = 0.0; /* input mass */
+	v = 0.0; /* output mass */
+	iu = NO_MASS_UNIT; /* input unit */
+	ou = NO_MASS_UNIT; /* output unit */
 
 	/* parse temperature value */
 	m = atof(argv[MASS_IN]);
