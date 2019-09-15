@@ -96,5 +96,7 @@ double get_mass(star_T *star, mass_T unit);
 double get_temp(star_T *star, temp_T unit);
 /*** prototypes for mathematical procedures ***/
 double bcv(double temperature, temp_T unit);
+double bv(double temperature, temp_T unit);
+double bv_I(double temperature, temp_T unit);
 
 #endif

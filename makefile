@@ -33,32 +33,49 @@ BCV_FRONTEND_IN=$(FRONTEND_CLI)/bcv.c
 all: libs cli
 cli: spectype_cli orbit_cli tc_cli mc_cli bcv_cli
 spectype_cli: libs
-	$(CC) $(CFLAGS) $(LFLAGS) $(SPECTYPE_FRONTEND_IN) -lexo -o spectype
-	mv spectype $(BDIR) 
+	@echo "BUILDING: spectral classifier"
+	@$(CC) $(CFLAGS) $(LFLAGS) $(SPECTYPE_FRONTEND_IN) -lexo -o spectype
+	@mv spectype $(BDIR)
+	@echo "*** DONE: Stored executable 'spectype' in binary directory." 
 orbit_cli: libs
-	$(CC) $(CFLAGS) $(LFLAGS) $(ORBIT_FRONTEND_IN) -lexo -o orbit 
-	mv orbit $(BDIR) 
+	@echo "BUILDING: orbit calculator"
+	@$(CC) $(CFLAGS) $(LFLAGS) $(ORBIT_FRONTEND_IN) -lexo -o orbit 
+	@mv orbit $(BDIR) 
+	@echo "*** DONE: Stored executable 'orbit' in binary directory." 
 tc_cli: libs
-	$(CC) $(CFLAGS) $(LFLAGS) $(TC_FRONTEND_IN) -lexo -o tc
-	mv tc $(BDIR) 
+	@echo "BUILDING: temperature converter"
+	@$(CC) $(CFLAGS) $(LFLAGS) $(TC_FRONTEND_IN) -lexo -o tc
+	@mv tc $(BDIR)
+	@echo "*** DONE: Stored executable 'tc' in binary directory." 
 mc_cli: libs
-	$(CC) $(CFLAGS) $(LFLAGS) $(MC_FRONTEND_IN) -lexo -o mc
-	mv mc $(BDIR) 
+	@echo "BUILDING: mass converter"
+	@$(CC) $(CFLAGS) $(LFLAGS) $(MC_FRONTEND_IN) -lexo -o mc
+	@mv mc $(BDIR) 
+	@echo "*** DONE: Stored executable 'mc' in binary directory." 
 bcv_cli: libs
-	$(CC) $(CFLAGS) $(LFLAGS) $(BCV_FRONTEND_IN) -lexo -o bcv
-	mv bcv $(BDIR) 
+	@echo "BUILDING: bolometric correction calculator"
+	@$(CC) $(CFLAGS) $(LFLAGS) $(BCV_FRONTEND_IN) -lexo -o bcv
+	@mv bcv $(BDIR) 
+	@echo "*** DONE: Stored executable 'bcv' in binary directory." 
 libs: dirs $(MATH_OBJ) $(UTIL_OBJ_GENERAL) $(UTIL_OBJ_ASTRO)
-	ar -cvq libexo.a *.o 
-	mv *.o $(ODIR)
-	mv libexo.a $(LDIR)
+	@echo "BUILDING: library"
+	@ar -cvq libexo.a *.o 
+	@mv *.o $(ODIR)
+	@mv libexo.a $(LDIR)
+	@echo "*** DONE: Stored library 'libexo.a' in library directory."
 dirs:
-	mkdir -p $(LDIR)
-	mkdir -p $(ODIR)
-	mkdir -p $(BDIR)
+	@echo "SETUP: directories"
+	@mkdir -p $(LDIR)
+	@mkdir -p $(ODIR)
+	@mkdir -p $(BDIR)
+	@echo "*** DONE: Created library, object and binary directories."
 rmobj:
-	rm -rf $(ODIR) 
+	@echo "CLEAN: objects"
+	@rm -rf $(ODIR) 
 rmbin:
-	rm -rf $(BDIR) $(LDIR)
+	@echo "CLEAN: binaries"
+	@rm -rf $(BDIR) $(LDIR)
 rmisc: 
-	rm -rf *.o a.out core 
+	@echo "CLEAN: miscellaneous"
+	@rm -rf *.o a.out core 
 clean: rmobj rmbin rmisc
