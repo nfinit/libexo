@@ -10,8 +10,6 @@
  *
  */
 
-#include <cerrno>
-#include <functional>
 #include <stdint.h>
 
 /* UNSIGNED INTEGERS */
