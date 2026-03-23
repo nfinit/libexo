@@ -5,10 +5,13 @@
  *
  * REVISION I (03/26) (C) NFINIT Systems 2026
  *
- * This file provides definitions for compatability with different CXX standards
+ * This file provides definitions for compatability with different CXX standards.
+ * Currently different signed and unsigned integer types are defined.
  *
  */
 
+#include <cerrno>
+#include <functional>
 #include <stdint.h>
 
 /* UNSIGNED INTEGERS */
@@ -65,6 +68,16 @@
 
 #ifdef uintmax_p
  #define uintmax_p uintmax_p
+#endif
+
+/* FLOATS */
+
+#ifdef float32_p
+ #define float32_p float
+#endif
+
+#ifdef float64_p
+ #define float64_p double 
 #endif
 
 #endif
