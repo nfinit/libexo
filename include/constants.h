@@ -3,7 +3,7 @@
 
 /* LIBEXO CONSTANT DEFINITIONS
  *
- * Revision I (04/17) (C) NFINIT Systems 2017
+ * Revision I (04/17) (C) NFINIT Systems 2026
  * Author: ict (ict@nfinit.systems)
  *
  * This file provides definitions for mathematical constants commonly used 
