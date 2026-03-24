@@ -99,4 +99,13 @@ double bcv(double temperature, temp_T unit);
 double bv(double temperature, temp_T unit);
 double bv_I(double temperature, temp_T unit);
 
+double calculate_star_max_age(double luminosity, double mass);
+double calculare_star_radius(double mass);
+double calculate_star_luminosity(double mass);
+double calculate_star_density(double mass);
+double calculate_star_temperature(double mass);
+double calculate_inner_hab_zone(double mass);
+double calculate_outer_hab_zone(double mass);
+bool is_habitable(double mass, double age);
+
 #endif

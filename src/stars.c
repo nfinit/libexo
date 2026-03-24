@@ -13,6 +13,7 @@
  */
 
 #include <math.h>
+#include <stdbool.h>
 #include "../include/stars.h"
 
 /* Procedure for deriving a bolometric correction given stellar effective
@@ -63,4 +64,71 @@ double bv_I(double temperature, temp_T unit)
 	/* Begin computation */
 	logt = log10(t);
 	return SA+(SB*logt)+(SC*pow(logt,2))+(SD*pow(logt,3))+(SE*pow(logt,4))+(SF*pow(logt,5));
+}
+
+// Calculating the maximum age
+
+double calculate_star_max_age(double luminosity, double mass) {
+  return luminosity * mass;
+}
+
+// Calculating the radius
+
+double calculate_star_radius(double mass) {
+  if (mass < 1.0f) {
+    return mass * 0.8f;
+  } else {
+    return mass * 0.57f;
+  };
+}
+
+// Calculating the luminosity
+
+double calculate_star_luminosity(double mass) {
+  if (mass < 0.43f) {
+    return 0.23f * (pow(mass, 2.3f)); 
+  } else {
+    if (mass < 2.0f) {
+      return pow(mass, 4);
+    } else {
+      return 1.4f * pow(mass, 3.5f);
+    }
+  }
+}
+
+// Calculating the density
+
+double calculate_star_density(double mass) {
+  return mass / (calculate_star_radius(mass) * 3.0f);
+}
+
+// Calculating the temperature
+
+double calculate_star_temperature(double mass) {
+  double luminosity_div_radius = (calculate_star_luminosity(mass) / pow(calculate_star_radius(mass), 2.0f));
+  return pow(luminosity_div_radius, 0.25f) * 5776.0f;
+}
+
+// Calculating the inner and outer boundary of a habitable zone
+
+double calculate_inner_hab_zone(double mass) {
+  return sqrt((mass / 1.1f));
+}
+
+double calculate_outer_hab_zone(double mass) {
+  return sqrt((mass / 0.53f));
+}
+
+// Boolean if it supports earth-like life
+
+bool is_habitable(double mass, double age) {
+  if (mass >= 0.5f && mass <= 1.4f) {
+    if (age >= 3.5) {
+      return true;
+    } else {
+      return false;
+    } 
+  } else {
+    return false;
+  }
 }
