@@ -10,72 +10,100 @@
  *
  */
 
-#include <stdint.h>
-
 /* UNSIGNED INTEGERS */
 
 #ifndef uint8_p
- #define uint8_p uint8_t
+ #ifdef UINT8_MAX 
+  #define uint8_p uint8_t
+ #else
+  #define uint8_p unsigned char
+ #endif
 #endif
 
 #ifndef uint16_p
- #define uint16_p uint16_t
+ #ifdef UINT16_MAX 
+  #define uint16_p uint16_t
+ #else
+  #define uint16_p unsigned short
+ #endif
 #endif
 
 #ifndef uint32_p
- #define uint32_p uint32_t
+ #ifdef UINT32_MAX 
+  #define uint32_p uint32_t
+ #else
+  #define uint32_p unsigned long
+ #endif
 #endif
 
 #ifndef uint64_p
- #define uint64_p uint64_t
+ #ifdef UINT64_MAX 
+  #define uint64_p uint64_t
+ #else
+  #define uint64_p unsigned long long 
+ #endif
 #endif
 
 /* SIGNED INTEGERS */
 
-#ifdef int8_p
- #define int8_p int8_t
+#ifndef int8_p
+ #ifdef INT8_MAX 
+  #define int8_p int8_t
+ #else
+  #define int8_p char
+ #endif
 #endif
 
-#ifdef int16_p
- #define int16_p int16_t
+#ifndef int16_p
+ #ifdef INT16_MAX 
+  #define int16_p int16_t
+ #else
+  #define int16_p short
+ #endif
 #endif
 
-#ifdef int32_p
- #define int32_p int32_t
+#ifndef int32_p
+ #ifdef INT32_MAX 
+  #define int32_p int32_t
+ #else
+  #define int32_p long
+ #endif
 #endif
 
-#ifdef int64_p
- #define int64_p int64_t
+#ifndef int64_p
+ #ifdef INT64_MAX 
+  #define int64_p int64_t
+ #else
+  #define int64_p long long 
+ #endif
 #endif
 
 /* POINTER-SIZED INTEGERS */
 
-#ifdef intptr_p
- #define intptr_p intptr_t
+#ifndef intptr_p
+ #ifdef INTPTR_MAX 
+  #define intptr_p intptr_t
+ #endif
 #endif
 
-#ifdef uintptr_p
- #define uintptr_p uintptr_t
+#ifndef uintptr_p
+ #ifdef UINTPTR_MAX 
+  #define uintptr_p uintptr_t
+ #endif
 #endif
 
 /* MAXIMUM-WIDTH INTEGERS */
 
-#ifdef intmax_p
- #define intmax_p intmax_t
+#ifndef intmax_p
+ #ifdef INTMAX_MAX 
+  #define intmax_p intmax_t
+ #endif
 #endif
 
-#ifdef uintmax_p
- #define uintmax_p uintmax_p
-#endif
-
-/* FLOATS */
-
-#ifdef float32_p
- #define float32_p float
-#endif
-
-#ifdef float64_p
- #define float64_p double 
+#ifndef uintmax_p
+ #ifdef UINTMAX_MAX 
+  #define uintmax_p uintmax_t
+ #endif
 #endif
 
 #endif

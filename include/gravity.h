@@ -16,6 +16,8 @@
  * Mass: kilograms
  */
 
+#include "compat.h"
+
 /*** surface gravity functions ***/
 double surface_gravity(double mass, double radius);
 double radius_sg(double mass, double sg);
