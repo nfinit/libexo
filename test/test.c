@@ -4,7 +4,7 @@
 * Revision I (25/26) (C) NFINIT Systems 2026
 * Author:
 *
-* THis file provides functions for testing different parts of libexo library
+* This file provides functions for testing different parts of libexo library
 */
 
 #include "../include/test.h"
@@ -12,24 +12,5 @@
 #include <stdio.h>
 
 int main() {
-    print_col_text(RED, "test");
 }
 
-void print_col_text(text_colour col, char *str) {
-    switch (col) {
-        case RED: printf( "%s%s%s", RED_COL, str, RESET_EC);
-            break;
-        case GREEN: printf( "%s%s%s",GREEN_COL, str, RESET_EC);
-            break;
-        case YELLOW: printf( "%s%s%s",YELLOW_COL, str, RESET_EC);
-            break;
-        case BLUE: printf( "%s%s%s",BLUE_COL, str, RESET_EC);
-            break;
-        case MAGENTA: printf( "%s%s%s",MAGENTA_COL, str, RESET_EC);
-           break;
-        case CYAN: printf( "%s%s%s",CYAN_COL, str, RESET_EC);
-            break;
-        case WHITE: printf( "%s%s%s",WHITE_COL, str, RESET_EC);
-            break;
-    }
-}
