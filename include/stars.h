@@ -11,6 +11,7 @@
  */
 
 #include "units.h"
+#include <stdbool.h>
 
 /* number of supported spectral types */
 #define NUM_SPECTRAL_TYPES 9
