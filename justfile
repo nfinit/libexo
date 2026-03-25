@@ -33,11 +33,24 @@ build:
     mv *.o {{build}}/{{object}}
     cc {{c_flags_two}} -o {{build}}/{{bin}}/{{build_target}} {{build}}/{{object}}/*.o
 
+# Builds tbe libexo library with debug symbols
+build-debug:
+    just clean
+    mkdir {{build}}
+    mkdir {{build}}/{{object}}
+    mkdir {{build}}/{{bin}}
+    cc {{c_flags_one}} -g {{src}}/*.c
+    mv *.o {{build}}/{{object}}
+    cc {{c_flags_two}} -g -o {{build}}/{{bin}}/{{build_target}} {{build}}/{{object}}/*.o
+
 # Runs the libexo executable    
 run:
+    ./{{build}}/{{bin}}/{{build_target}}
 
 # Builds the libexo library and runs the executable
 build-run:
+    just build
+    just run
 
 # Removes old build directory
 clean:
