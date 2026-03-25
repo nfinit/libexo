@@ -101,7 +101,7 @@ double bv(double temperature, temp_T unit);
 double bv_I(double temperature, temp_T unit);
 
 double calculate_star_max_age(double luminosity, double mass);
-double calculare_star_radius(double mass);
+double calculate_star_radius(double mass);
 double calculate_star_luminosity(double mass);
 double calculate_star_density(double mass);
 double calculate_star_temperature(double mass);

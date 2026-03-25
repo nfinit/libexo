@@ -69,16 +69,16 @@ double bv_I(double temperature, temp_T unit)
 // Calculating the maximum age
 
 double calculate_star_max_age(double luminosity, double mass) {
-  return luminosity * mass;
+  return (mass/luminosity) * 10;
 }
 
 // Calculating the radius
 
 double calculate_star_radius(double mass) {
   if (mass < 1.0f) {
-    return mass * 0.8f;
+    return pow(mass, 0.8f);
   } else {
-    return mass * 0.57f;
+    return pow(mass, 0.57f);
   };
 }
 
@@ -99,7 +99,7 @@ double calculate_star_luminosity(double mass) {
 // Calculating the density
 
 double calculate_star_density(double mass) {
-  return mass / (calculate_star_radius(mass) * 3.0f);
+  return mass / (pow((calculate_star_radius(mass)), 3.0f));
 }
 
 // Calculating the temperature
@@ -112,11 +112,11 @@ double calculate_star_temperature(double mass) {
 // Calculating the inner and outer boundary of a habitable zone
 
 double calculate_inner_hab_zone(double mass) {
-  return sqrt((mass / 1.1f));
+  return sqrt(calculate_star_luminosity(mass) / 1.1f);
 }
 
 double calculate_outer_hab_zone(double mass) {
-  return sqrt((mass / 0.53f));
+  return sqrt(calculate_star_luminosity(mass) / 0.53f);
 }
 
 // Boolean if it supports earth-like life

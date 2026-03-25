@@ -10,13 +10,26 @@
 #include "../include/test.h"
 #include "../include/colour_print.h"
 #include "../include/compat.h"
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 
+#include "../include/stars.h"
+
 int main() {
     test_info test_info = {0, 0, 0};
-    run_test_bool(false, true, &test_info);
+
+    // Testing stars.c
+    run_test_double((calculate_star_max_age(2.074f, 1.200f)), 5.7859209f, &test_info);
+    run_test_double((calculate_star_radius(1.200f)), 1.109515f, &test_info);
+    run_test_double((calculate_star_luminosity(1.200f)), 2.073600f, &test_info);
+    run_test_double((calculate_star_density(1.200f)), 0.878580f, &test_info);
+    run_test_double((calculate_star_temperature(1.200f)), 6580.240823f, &test_info);
+    run_test_double((calculate_inner_hab_zone(1.200f)), 1.372986f, &test_info);
+    run_test_double((calculate_outer_hab_zone(1.200f)), 1.977992f, &test_info);
+    run_test_bool((is_habitable(1.200f, 4.500f)), true, &test_info);
+
     print_testing_info(test_info);
 }
 
@@ -40,7 +53,7 @@ test_info run_test_bool(bool input_value, bool expected_value, test_info *test_i
     test_info->n_of_tests += 1;
     if (input_value == expected_value) {
         print_test_result(true);
-        printf(" Expected value: %b, the input value: $b\n", expected_value, input_value);
+        printf(" Expected value: %b, the input value: %b\n", expected_value, input_value);
         test_info->n_of_succ_tests += 1;
     }
     else {
@@ -173,12 +186,24 @@ test_info run_test_uint64(uint64_p input_value, uint64_p expected_value, test_in
 }
 
 void print_testing_info(test_info test_info) {
-    printf("Testing complete. Run: %i ", test_info.n_of_tests);
-    print_col_text(MAGENTA, "tests in total, ");
+    printf("Testing complete. Results: %i ", test_info.n_of_tests);
+    if (test_info.n_of_tests == 1) {
+        print_col_text(MAGENTA, "test in total, ");
+    } else {
+        print_col_text(MAGENTA, "tests in total, ");
+    }
     printf("%i ", test_info.n_of_succ_tests);
-    print_col_text(GREEN, "successful tests, ");
+    if (test_info.n_of_succ_tests == 1) {
+        print_col_text(GREEN, "successful test, ");
+    } else {
+        print_col_text(GREEN, "successful tests, ");
+    }
     printf("%i ", test_info.n_of_failed_tests);
-    print_col_text(RED, "failed tests");
+    if (test_info.n_of_failed_tests == 1) {
+        print_col_text(RED, "failed tests");
+    } else {
+        print_col_text(RED, "failed tests");
+    }
     printf(".\n");
 }
 
