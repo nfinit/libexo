@@ -1,5 +1,5 @@
 #ifndef _EXO_COLOUR_PRINT_H_
-#define _EXO_COLOUT_PRINT_H_
+#define _EXO_COLOUR_PRINT_H_
 
 /* LIBEXO COLOUR PRINTING DEFINITIOS
  * 
@@ -33,11 +33,15 @@ typedef enum {
 } text_colour;
 
 // Prints the coloured text given an input color from text_colour enum
-// and string as an input. WARNING: DOESN`T END WITH "\n"
+// and string as an input.
+//
+// WARNING: DOESN`T END WITH "\n"
 void print_col_text(text_colour col, char *str);
 
 // Prints the coloured text given an input color from text_colour enum
-// and string as an input. WARNING: ENDS WITH "\n"
+// and string as an input.
+//
+// WARNING: ENDS WITH "\n"
 void print_col_text_nd(text_colour col, char *str);
 
 #endif

@@ -55,7 +55,7 @@ test-build:
     just clean
     mkdir {{build}}
     mkdir {{build}}/{{test}}
-    cc {{c_flags_test}} {{test}}/*.c -o {{build}}/{{test}}/{{test_target}}
+    cc {{c_flags_test}} {{test}}/*.c {{src}}/frontend/colour_print.c -o {{build}}/{{test}}/{{test_target}}
 
 [private]
 test-run:

@@ -8,7 +8,6 @@
 */
 
 #include "../../include/colour_print.h"
-#include "../../include/compat.h"
 #include <stdio.h>
 
 void print_col_text(text_colour col, char *str) {
