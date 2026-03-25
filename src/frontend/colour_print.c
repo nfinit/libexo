@@ -29,3 +29,22 @@ void print_col_text(text_colour col, char *str) {
             break;
     }
 }
+
+void print_col_text_nd(text_colour col, char *str) {
+    switch (col) {
+        case RED: printf( "%s%s%s\n", RED_COL, str, RESET_EC);
+            break;
+        case GREEN: printf( "%s%s%s\n",GREEN_COL, str, RESET_EC);
+            break;
+        case YELLOW: printf( "%s%s%s\n",YELLOW_COL, str, RESET_EC);
+            break;
+        case BLUE: printf( "%s%s%s\n",BLUE_COL, str, RESET_EC);
+            break;
+        case MAGENTA: printf( "%s%s%s\n",MAGENTA_COL, str, RESET_EC);
+           break;
+        case CYAN: printf( "%s%s%s\n",CYAN_COL, str, RESET_EC);
+            break;
+        case WHITE: printf( "%s%s%s\n",WHITE_COL, str, RESET_EC);
+            break;
+    }
+}
