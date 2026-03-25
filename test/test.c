@@ -9,3 +9,9 @@
 
 #include "../include/test.h"
 #include "../include/compat.h"
+#include <stdio.h>
+
+int main() {
+  printf("Hello World!\n");
+}
+

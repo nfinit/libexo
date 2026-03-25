@@ -2,6 +2,7 @@
 
 c_flags_one := "-c -fPIC -Wall -Wextra -Wpedantic -O2"
 c_flags_two := "-shared"
+c_flags_test := "-Wall -Wextra -Wpedantic -O2"
 src := "src"
 build := "build"
 object := "object"
@@ -54,7 +55,7 @@ test-build:
     just clean
     mkdir {{build}}
     mkdir {{build}}/{{test}}
-    cc {{c_flags_one}} {{test}}/*.c -o {{build}}/{{test}}/{{test_target}}
+    cc {{c_flags_test}} {{test}}/*.c -o {{build}}/{{test}}/{{test_target}}
 
 [private]
 test-run:
