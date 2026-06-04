@@ -94,3 +94,72 @@ double star_radius_simple(double luminosity, double temperature) {
 double star_lifetime_simple(double mass, double luminosity) {
   return (10.9f * mass)/luminosity;
 }
+
+/* COMPLEX APPROXIMATIONS */
+
+double star_luminosity_complex(double mass) {
+  if (mass > 0.179f && mass <= 0.45f) {
+    return pow(10, (2.028f*log(mass)-0.976f));
+  }
+  if (mass > 0.45f && mass <= 0.72f) {
+    return pow(10, (4.572f*log(mass)-0.102f));
+  }
+  if (mass > 0.72f && mass <= 1.05f) {
+    return pow(10, (5.743f*log(mass)-0.007f));
+  }
+  if (mass > 1.05f && mass <= 2.4f) {
+    return pow(10, (4.329f*log(mass)+0.010f));
+  }
+  if (mass > 2.4f && mass <= 7.0f) {
+    return pow(10, (3.967f*log(mass)+0.093f));
+  }
+  if (mass > 7.0f && mass <= 31.0f) {
+    return pow(10, (2.865f*log(mass)+1.105f));
+  }
+}
+
+/* EVOLUTIONARY MODELS */
+
+double star_main_sequence_timeframe_start(double mass) {
+  return 0.0805f/(pow(mass, 2.22f));
+}
+
+double star_main_sequence_timeframe_end(double mass) {
+  return (10/pow(mass, 4.05f))*(0.0056f * pow((mass+3.993f), 3.16f) + 0.042f);
+}
+
+double star_luminosity_timeframe_start(double mass) {
+  if (mass > 0.74f && mass < 1.5f) {
+    return star_main_sequence_timeframe_end(mass)/2;
+  }
+  if (mass > 1.5f && mass < 10.0f) {
+    return star_main_sequence_timeframe_end(mass)/2;
+  }
+}
+
+double star_luminosity_timeframe_end(double mass) {
+  if (mass > 0.74f && mass < 1.5f) {
+    return 1.64f * pow(mass, 3.81f);
+  }
+  if (mass > 1.5f && mass < 10.0f) {
+    return 2.22f * pow(mass, 3.77f);
+  }
+}
+
+double star_effective_temperature_timeframe_start(double mass) {
+  if (mass > 0.74f && mass < 1.5f) {
+    return 1924.0f*pow(mass-0.7041f, 0.4f)+1628.0f * mass+2794.0f;
+  }
+  if (mass > 1.5f && mass < 10.0f) {
+    return 13723.0f*pow(mass-0.12f, 0.4f)-8434.0f;
+  }
+}
+
+double star_effective_temperature_timeframe_end(double mass) {
+  if (mass > 0.74f && mass < 1.5f) {
+    return -2709.0f*pow(mass+2.2635f, 1.5f)+9500.0f * mass+12304.0f;
+  }
+  if (mass > 1.5f && mass < 10.0f) {
+    return -714.7f*pow(mass+0.4831f, 1.5f)-4504.0f*mass+2020.0f;
+  }
+}

@@ -107,4 +107,6 @@ double star_luminosity_simple(double mass);
 double star_radius_simple(double luminsoity, double temperature);
 double star_lifetime_simple(double mass, double luminosity);
 
+/* COMPLEX APPROXIMATIONS */
+
 #endif
