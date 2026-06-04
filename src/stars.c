@@ -66,69 +66,31 @@ double bv_I(double temperature, temp_T unit)
 	return SA+(SB*logt)+(SC*pow(logt,2))+(SD*pow(logt,3))+(SE*pow(logt,4))+(SF*pow(logt,5));
 }
 
-// Calculating the maximum age
+/* SIMPLE APPROXIMATIONS */
 
-double calculate_star_max_age(double luminosity, double mass) {
-  return (mass/luminosity) * 10;
+double star_effective_termperature_simple(double mass) {
+  return 5778.0f * pow(mass, 0.54);
 }
 
-// Calculating the radius
-
-double calculate_star_radius(double mass) {
-  if (mass < 1.0f) {
-    return pow(mass, 0.8f);
-  } else {
-    return pow(mass, 0.57f);
-  };
-}
-
-// Calculating the luminosity
-
-double calculate_star_luminosity(double mass) {
-  if (mass < 0.43f) {
-    return 0.23f * (pow(mass, 2.3f)); 
-  } else {
-    if (mass < 2.0f) {
-      return pow(mass, 4);
-    } else {
-      return 1.4f * pow(mass, 3.5f);
-    }
+double star_luminosity_simple(double mass) {
+  if (mass > 0.08f && mass < 0.43f) {
+    return 0.23f * pow(mass, 2.3f);
+  }
+  if (mass > 0.43f && mass < 2.0f) {
+    return pow(mass, 4.0f);
+  }
+  if (mass > 2.0f && mass < 55.0f) {
+    return 1.4f * pow(mass, 3.5f);
+  }
+  if (mass > 55.0f) {
+    return 32000 * mass;
   }
 }
 
-// Calculating the density
-
-double calculate_star_density(double mass) {
-  return mass / (pow((calculate_star_radius(mass)), 3.0f));
+double star_radius_simple(double luminosity, double temperature) {
+  return sqrt(luminosity)/(pow(temperature/5778.0f, 2));
 }
 
-// Calculating the temperature
-
-double calculate_star_temperature(double mass) {
-  double luminosity_div_radius = (calculate_star_luminosity(mass) / pow(calculate_star_radius(mass), 2.0f));
-  return pow(luminosity_div_radius, 0.25f) * 5776.0f;
-}
-
-// Calculating the inner and outer boundary of a habitable zone
-
-double calculate_inner_hab_zone(double mass) {
-  return sqrt(calculate_star_luminosity(mass) / 1.1f);
-}
-
-double calculate_outer_hab_zone(double mass) {
-  return sqrt(calculate_star_luminosity(mass) / 0.53f);
-}
-
-// Boolean if it supports earth-like life
-
-bool is_habitable(double mass, double age) {
-  if (mass >= 0.5f && mass <= 1.4f) {
-    if (age >= 3.5) {
-      return true;
-    } else {
-      return false;
-    } 
-  } else {
-    return false;
-  }
+double star_lifetime_simple(double mass, double luminosity) {
+  return (10.9f * mass)/luminosity;
 }
